@@ -61,5 +61,13 @@ jobs:
       - name: Build project
         run: yarn build
 
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: My NestJS example app
+          path: |
+            dist
+            package.json
+
       - name: Deploy
         run: echo 'Deploy, deploy, deploy...'
