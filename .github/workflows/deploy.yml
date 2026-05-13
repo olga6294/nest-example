@@ -43,7 +43,7 @@ jobs:
         run: yarn test
 
   deploy:
-    needs: [run-lint, run-test]
+    needs: [run-eslint, run-test]
     runs-on: ubuntu-latest
 
     steps:
