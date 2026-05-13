@@ -1,0 +1,45 @@
+name: Run tests and deploy
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v6
+
+      - name: Install proper version of NodeJS
+        uses: actions/setup-node@v6
+        with: 
+          node-version-file: package.json
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run tests
+        run: yarn test
+
+  deploy:
+    runs_on: ubuntu_latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      
+      - name: Install proper version of NodeJS
+        uses: actions/setup-node@v6
+        with: 
+          node-version-file: package.json
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build project
+        run: yarn build
+
+      - name: deploy
+        run: echo 'Deploy, deploy, deploy...'
