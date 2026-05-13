@@ -1,0 +1,25 @@
+name: Run tests 
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install proper version of NodeJS
+        uses: actions/setup-node@v6
+        with: 
+          node-version-file: package.json
+
+
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        run: yarn test
