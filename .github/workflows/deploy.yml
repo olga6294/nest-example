@@ -62,7 +62,7 @@ jobs:
         run: yarn build
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: My NestJS example app
           path: |
