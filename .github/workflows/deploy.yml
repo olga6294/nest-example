@@ -24,6 +24,7 @@ jobs:
         run: yarn test
 
   deploy:
+    needs: run-test
     runs-on: ubuntu-latest
 
     steps:
@@ -41,5 +42,5 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: deploy
+      - name: Deploy
         run: echo 'Deploy, deploy, deploy...'
