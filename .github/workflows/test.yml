@@ -17,6 +17,9 @@ jobs:
         with: 
           node-version-file: package.json
 
+      - name: Check currently used NodeJS version
+        run: node --version
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
