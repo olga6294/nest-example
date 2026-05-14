@@ -80,7 +80,7 @@ jobs:
     needs: build
     steps:
       - name: Print output filename
-        run: echo "Output from build job $${{ needs.build.outputs.filename }}"
+        run: echo "Output from build job ${{ needs.build.outputs.filename }}"
 
       - name: Deploy
         run: echo 'Deploy, deploy, deploy...'
