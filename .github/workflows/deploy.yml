@@ -5,6 +5,9 @@ on:
   push:
     branches: ['main']
 
+env:
+  MONGODB_NAME: gha-db
+
 jobs:
   run-eslint:
     runs-on: ubuntu-latest
@@ -24,6 +27,9 @@ jobs:
         run: yarn lint
 
   run-test:
+    environment: test
+    env:
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
     needs: run-eslint
     runs-on: ubuntu-latest
 
@@ -45,17 +51,13 @@ jobs:
   build:
     needs: [run-eslint, run-test]
     runs-on: ubuntu-latest
+    container: node:24
     outputs:
       filename: ${{ steps.publish.outputs.module-filename }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-      
-      - name: Install proper version of NodeJS
-        uses: actions/setup-node@v6
-        with: 
-          node-version-file: package.json
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
